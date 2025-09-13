@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS Mastery Showcase</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* CSS Variables */
+        :root {
+            --primary: #4361ee;
+            --secondary: #3a0ca3;
+            --accent: #f72585;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --gray: #6c757d;
+            --success: #4cc9f0;
+            --warning: #ffd166;
+            --danger: #ef476f;
+            --transition: all 0.3s ease;
+            --shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            --radius: 10px;
+            --gradient: linear-gradient(135deg, var(--primary), var(--secondary));
+        }
+
+        /* Global Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            color: var(--dark);
+            line-height: 1.6;
+            background-color: #f8f9fa;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        section {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .section-title h2 {
+            font-size: 36px;
+            margin-bottom: 15px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background: var(--gradient);
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background: var(--gradient);
+            color: white;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+            box-shadow: var(--shadow);
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Header Styles */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            background-color: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 15px 0;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .logo span {
+            color: var(--secondary);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-left: 30px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        /* Hero Section */
+        .hero {
+            padding-top: 150px;
+            padding-bottom: 100px;
+            background: linear-gradient(135deg, rgba(255,255,255,1) 0%, rgba(245,247,252,1) 100%);
+        }
+
+        .hero-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .hero-text {
+            flex: 1;
+            padding-right: 30px;
+        }
+
+        .hero-text h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .hero-text p {
+            font-size: 18px;
+            color: var(--gray);
+            margin-bottom: 30px;
+        }
+
+        .hero-image {
+            flex: 1;
+            text-align: center;
+        }
+
+        .hero-image img {
+            max-width: 100%;
+            border-radius: 50%;
+            border: 5px solid white;
+            box-shadow: var(--shadow);
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+
+        /* CSS Features Section */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 30px;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .feature-card i {
+            font-size: 40px;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+
+        .feature-card h3 {
+            margin-bottom: 15px;
+        }
+
+        .feature-card p {
+            color: var(--gray);
+        }
+
+        /* CSS Demo Section */
+        .demo-section {
+            background-color: #f8f9fa;
+        }
+
+        .demo-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+
+        .demo-box {
+            flex: 1;
+            min-width: 300px;
+            background: white;
+            padding: 30px;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+        }
+
+        .demo-title {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: var(--primary);
+        }
+
+        /* Flexbox Demo */
+        .flex-container {
+            display: flex;
+            gap: 10px;
+            padding: 20px;
+            background: #f1f3f9;
+            border-radius: var(--radius);
+            margin-bottom: 20px;
+        }
+
+        .flex-item {
+            padding: 20px;
+            background: var(--primary);
+            color: white;
+            border-radius: 5px;
+            text-align: center;
+            flex: 1;
+        }
+
+        /* Grid Demo */
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            padding: 20px;
+            background: #f1f3f9;
+            border-radius: var(--radius);
+            margin-bottom: 20px;
+        }
+
+        .grid-item {
+            padding: 20px;
+            background: var(--secondary);
+            color: white;
+            border-radius: 5px;
+            text-align: center;
+        }
+
+        /* Animation Demo */
+        .animation-demo {
+            text-align: center;
+            padding: 30px;
+        }
+
+        .animated-box {
+            width: 100px;
+            height: 100px;
+            background: var(--accent);
+            margin: 0 auto;
+            border-radius: var(--radius);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.1); opacity: 0.8; }
+        }
+
+        /* Hover Demo */
+        .hover-demo {
+            padding: 30px;
+            text-align: center;
+        }
+
+        .hover-element {
+            display: inline-block;
+            padding: 15px 30px;
+            background: var(--success);
+            color: white;
+            border-radius: var(--radius);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .hover-element:hover {
+            background: var(--warning);
+            transform: rotate(5deg) scale(1.1);
+        }
+
+        /* Transform Demo */
+        .transform-demo {
+            display: flex;
+            justify-content: space-around;
+            padding: 30px;
+        }
+
+        .transform-item {
+            width: 80px;
+            height: 80px;
+            background: var(--danger);
+            border-radius: 10px;
+            transition: var(--transition);
+        }
+
+        .transform-item:nth-child(1):hover {
+            transform: translateY(-20px);
+        }
+
+        .transform-item:nth-child(2):hover {
+            transform: rotate(45deg);
+        }
+
+        .transform-item:nth-child(3):hover {
+            transform: scale(1.5);
+        }
+
+        .transform-item:nth-child(4):hover {
+            transform: skew(20deg);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 50px 0 20px;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 30px;
+        }
+
+        .footer-logo {
+            flex: 1;
+        }
+
+        .footer-logo h2 {
+            color: white;
+            margin-bottom: 15px;
+        }
+
+        .footer-links {
+            flex: 1;
+        }
+
+        .footer-links h3 {
+            margin-bottom: 20px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .footer-links h3::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background: var(--primary);
+        }
+
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: var(--primary);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border-radius: 50%;
+            transition: var(--transition);
+        }
+
+        .social-links a:hover {
+            background: var(--primary);
+            transform: translateY(-3px);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .hero-content {
+                flex-direction: column;
+            }
+            
+            .hero-text {
+                margin-bottom: 40px;
+                text-align: center;
+                padding-right: 0;
+            }
+            
+            .footer-content {
+                flex-direction: column;
+                gap: 30px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .hero-text h1 {
+                font-size: 36px;
+            }
+            
+            .section-title h2 {
+                font-size: 28px;
+            }
+            
+            .demo-container {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">CSS<span>Mastery</span></div>
+                <ul class="nav-links">
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#demos">Demos</a></li>
+                    <li><a href="#examples">Examples</a></li>
+                    <li><a href="#resources">Resources</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1>Master CSS with Interactive Examples</h1>
+                    <p>Explore the power of modern CSS through practical examples and visual demonstrations. Learn how to create beautiful, responsive designs with Flexbox, Grid, Animations, and more.</p>
+                    <a href="#demos" class="btn">Explore Demos</a>
+                </div>
+                <div class="hero-image">
+                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80" alt="CSS Mastery">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CSS Features Section -->
+    <section id="features" class="features">
+        <div class="container">
+            <div class="section-title">
+                <h2>CSS Features</h2>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <i class="fas fa-th"></i>
+                    <h3>Flexbox & Grid</h3>
+                    <p>Create modern, responsive layouts with CSS Flexbox and Grid systems.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-magic"></i>
+                    <h3>Animations</h3>
+                    <p>Bring your designs to life with smooth transitions and keyframe animations.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-palette"></i>
+                    <h3>Variables</h3>
+                    <p>Use CSS custom properties for consistent theming and easier maintenance.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-mobile-alt"></i>
+                    <h3>Responsive Design</h3>
+                    <p>Create websites that look great on all devices with media queries.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-fill-drip"></i>
+                    <h3>Gradients & Shadows</h3>
+                    <p>Add depth and visual interest with CSS gradients and box shadows.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-code"></i>
+                    <h3>Modern Selectors</h3>
+                    <p>Leverage the power of advanced CSS selectors for precise styling.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CSS Demo Section -->
+    <section id="demos" class="demo-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>CSS Demos</h2>
+            </div>
+            
+            <!-- Flexbox Demo -->
+            <div class="demo-container">
+                <div class="demo-box">
+                    <h3 class="demo-title">Flexbox Layout</h3>
+                    <p>Flexbox makes it easy to create flexible and responsive layouts.</p>
+                    <div class="flex-container">
+                        <div class="flex-item">Item 1</div>
+                        <div class="flex-item">Item 2</div>
+                        <div class="flex-item">Item 3</div>
+                    </div>
+                    <p>Try resizing the browser to see the responsive behavior.</p>
+                </div>
+                
+                <!-- Grid Demo -->
+                <div class="demo-box">
+                    <h3 class="demo-title">CSS Grid</h3>
+                    <p>CSS Grid allows you to create two-dimensional layouts with precise control.</p>
+                    <div class="grid-container">
+                        <div class="grid-item">1</div>
+                        <div class="grid-item">2</div>
+                        <div class="grid-item">3</div>
+                        <div class="grid-item">4</div>
+                        <div class="grid-item">5</div>
+                        <div class="grid-item">6</div>
+                    </div>
+                    <p>Grid containers manage both rows and columns simultaneously.</p>
+                </div>
+            </div>
+            
+            <!-- Animation Demo -->
+            <div class="demo-container">
+                <div class="demo-box">
+                    <h3 class="demo-title">CSS Animations</h3>
+                    <p>CSS animations allow you to animate transitions between styles.</p>
+                    <div class="animation-demo">
+                        <div class="animated-box"></div>
+                    </div>
+                    <p>This element uses keyframes to create a continuous pulsing effect.</p>
+                </div>
+                
+                <!-- Hover Effects Demo -->
+                <div class="demo-box">
+                    <h3 class="demo-title">Hover Effects</h3>
+                    <p>CSS provides powerful hover effects to enhance user interaction.</p>
+                    <div class="hover-demo">
+                        <div class="hover-element">Hover Me</div>
+                    </div>
+                    <p>Hover over the element to see the transformation.</p>
+                </div>
+            </div>
+            
+            <!-- Transform Demo -->
+            <div class="demo-container">
+                <div class="demo-box">
+                    <h3 class="demo-title">CSS Transforms</h3>
+                    <p>The transform property allows you to rotate, scale, skew, or translate elements.</p>
+                    <div class="transform-demo">
+                        <div class="transform-item"></div>
+                        <div class="transform-item"></div>
+                        <div class="transform-item"></div>
+                        <div class="transform-item"></div>
+                    </div>
+                    <p>Hover over each box to see different transform effects.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <h2>CSS Mastery</h2>
+                    <p>Learn modern CSS techniques through interactive examples and visual demonstrations.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-codepen"></i></a>
+                        <a href="#"><i class="fab fa-github"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+                <div class="footer-links">
+                    <h3>Resources</h3>
+                    <ul>
+                        <li><a href="#">CSS Documentation</a></li>
+                        <li><a href="#">Flexbox Guide</a></li>
+                        <li><a href="#">Grid Tutorial</a></li>
+                        <li><a href="#">Animation Examples</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 CSS Mastery. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
