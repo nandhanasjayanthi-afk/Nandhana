@@ -1,0 +1,827 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript Interactive Showcase</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* CSS Variables */
+        :root {
+            --primary: #4361ee;
+            --secondary: #3a0ca3;
+            --accent: #f72585;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --gray: #6c757d;
+            --success: #4cc9f0;
+            --warning: #ffd166;
+            --danger: #ef476f;
+            --transition: all 0.3s ease;
+            --shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            --radius: 10px;
+            --gradient: linear-gradient(135deg, var(--primary), var(--secondary));
+        }
+
+        /* Global Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            color: var(--dark);
+            line-height: 1.6;
+            background-color: #f8f9fa;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        section {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .section-title h2 {
+            font-size: 36px;
+            margin-bottom: 15px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background: var(--gradient);
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background: var(--gradient);
+            color: white;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+            box-shadow: var(--shadow);
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Header Styles */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            background-color: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 15px 0;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .logo span {
+            color: var(--secondary);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-left: 30px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        /* Hero Section */
+        .hero {
+            padding-top: 150px;
+            padding-bottom: 100px;
+            background: linear-gradient(135deg, rgba(255,255,255,1) 0%, rgba(245,247,252,1) 100%);
+        }
+
+        .hero-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .hero-text {
+            flex: 1;
+            padding-right: 30px;
+        }
+
+        .hero-text h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .hero-text p {
+            font-size: 18px;
+            color: var(--gray);
+            margin-bottom: 30px;
+        }
+
+        .hero-image {
+            flex: 1;
+            text-align: center;
+        }
+
+        .hero-image img {
+            max-width: 100%;
+            border-radius: 50%;
+            border: 5px solid white;
+            box-shadow: var(--shadow);
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+
+        /* Features Section */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 30px;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .feature-card i {
+            font-size: 40px;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+
+        .feature-card h3 {
+            margin-bottom: 15px;
+        }
+
+        .feature-card p {
+            color: var(--gray);
+        }
+
+        /* Demo Section */
+        .demo-section {
+            background-color: #f8f9fa;
+        }
+
+        .demo-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+
+        .demo-box {
+            flex: 1;
+            min-width: 300px;
+            background: white;
+            padding: 30px;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+        }
+
+        .demo-title {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: var(--primary);
+        }
+
+        /* DOM Manipulation Demo */
+        .dom-demo {
+            padding: 20px;
+            background: #f1f3f9;
+            border-radius: var(--radius);
+            margin-bottom: 20px;
+        }
+
+        .dom-controls {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .dom-element {
+            padding: 20px;
+            background: var(--primary);
+            color: white;
+            border-radius: 5px;
+            text-align: center;
+            transition: var(--transition);
+        }
+
+        /* Event Handling Demo */
+        .event-demo {
+            padding: 30px;
+            text-align: center;
+        }
+
+        .event-box {
+            width: 200px;
+            height: 200px;
+            margin: 0 auto;
+            background: var(--accent);
+            border-radius: var(--radius);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        /* Counter Demo */
+        .counter-demo {
+            text-align: center;
+            padding: 30px;
+        }
+
+        .counter-value {
+            font-size: 48px;
+            font-weight: bold;
+            margin: 20px 0;
+            color: var(--primary);
+        }
+
+        .counter-controls {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        /* API Demo */
+        .api-demo {
+            padding: 20px;
+        }
+
+        .user-card {
+            background: white;
+            padding: 20px;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            margin-top: 20px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .user-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        /* To-Do List Demo */
+        .todo-demo {
+            padding: 20px;
+        }
+
+        .todo-input {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .todo-input input {
+            flex: 1;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        .todo-list {
+            list-style: none;
+        }
+
+        .todo-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            transition: var(--transition);
+        }
+
+        .todo-item:hover {
+            background: #e9ecef;
+        }
+
+        .todo-item.completed {
+            text-decoration: line-through;
+            opacity: 0.7;
+        }
+
+        .todo-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .todo-actions button {
+            padding: 5px 10px;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 50px 0 20px;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 30px;
+        }
+
+        .footer-logo {
+            flex: 1;
+        }
+
+        .footer-logo h2 {
+            color: white;
+            margin-bottom: 15px;
+        }
+
+        .footer-links {
+            flex: 1;
+        }
+
+        .footer-links h3 {
+            margin-bottom: 20px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .footer-links h3::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background: var(--primary);
+        }
+
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: var(--primary);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border-radius: 50%;
+            transition: var(--transition);
+        }
+
+        .social-links a:hover {
+            background: var(--primary);
+            transform: translateY(-3px);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .hero-content {
+                flex-direction: column;
+            }
+            
+            .hero-text {
+                margin-bottom: 40px;
+                text-align: center;
+                padding-right: 0;
+            }
+            
+            .footer-content {
+                flex-direction: column;
+                gap: 30px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .hero-text h1 {
+                font-size: 36px;
+            }
+            
+            .section-title h2 {
+                font-size: 28px;
+            }
+            
+            .demo-container {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">JS<span>Showcase</span></div>
+                <ul class="nav-links">
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#demos">Demos</a></li>
+                    <li><a href="#examples">Examples</a></li>
+                    <li><a href="#resources">Resources</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1>JavaScript Interactive Showcase</h1>
+                    <p>Explore the power of JavaScript through interactive examples. Learn how to manipulate the DOM, handle events, work with APIs, and build dynamic web applications.</p>
+                    <a href="#demos" class="btn">Explore Demos</a>
+                </div>
+                <div class="hero-image">
+                    <img src="https://images.unsplash.com/photo-1627398242454-45a1465c2479?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1064&q=80" alt="JavaScript Showcase">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- JavaScript Features Section -->
+    <section id="features" class="features">
+        <div class="container">
+            <div class="section-title">
+                <h2>JavaScript Features</h2>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <i class="fas fa-code"></i>
+                    <h3>DOM Manipulation</h3>
+                    <p>Dynamically modify content, structure, and style of web pages with JavaScript.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-mouse"></i>
+                    <h3>Event Handling</h3>
+                    <p>Respond to user interactions like clicks, keyboard input, and form submissions.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-sync-alt"></i>
+                    <h3>Async Operations</h3>
+                    <p>Handle asynchronous tasks with callbacks, promises, and async/await.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-database"></i>
+                    <h3>API Interactions</h3>
+                    <p>Fetch data from external APIs and integrate it into your web applications.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-cogs"></i>
+                    <h3>Modern ES6+ Features</h3>
+                    <p>Leverage modern JavaScript syntax like arrow functions, destructuring, and modules.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-tasks"></i>
+                    <h3>State Management</h3>
+                    <p>Manage application state and build dynamic, interactive user interfaces.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- JavaScript Demo Section -->
+    <section id="demos" class="demo-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>JavaScript Demos</h2>
+            </div>
+            
+            <!-- DOM Manipulation Demo -->
+            <div class="demo-container">
+                <div class="demo-box">
+                    <h3 class="demo-title">DOM Manipulation</h3>
+                    <p>JavaScript allows you to dynamically modify the content and style of elements.</p>
+                    <div class="dom-demo">
+                        <div class="dom-controls">
+                            <button class="btn" id="changeText">Change Text</button>
+                            <button class="btn" id="changeColor">Change Color</button>
+                            <button class="btn" id="resetDom">Reset</button>
+                        </div>
+                        <div class="dom-element" id="demoElement">
+                            Click the buttons to modify me!
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Event Handling Demo -->
+                <div class="demo-box">
+                    <h3 class="demo-title">Event Handling</h3>
+                    <p>JavaScript can respond to user interactions like clicks, mouse movements, and more.</p>
+                    <div class="event-demo">
+                        <div class="event-box" id="eventBox">
+                            Click or Hover Me!
+                        </div>
+                        <p id="eventStatus" class="mt-3">Interact with the box to see events in action</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Counter Demo -->
+            <div class="demo-container">
+                <div class="demo-box">
+                    <h3 class="demo-title">Counter with State</h3>
+                    <p>JavaScript can manage application state and update the UI accordingly.</p>
+                    <div class="counter-demo">
+                        <div class="counter-value" id="counterValue">0</div>
+                        <div class="counter-controls">
+                            <button class="btn" id="decrement">-</button>
+                            <button class="btn" id="increment">+</button>
+                            <button class="btn" id="resetCounter">Reset</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- API Demo -->
+                <div class="demo-box">
+                    <h3 class="demo-title">API Interaction</h3>
+                    <p>JavaScript can fetch data from external APIs and display it on your web page.</p>
+                    <div class="api-demo">
+                        <button class="btn" id="fetchUser">Fetch Random User</button>
+                        <div id="userData"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- To-Do List Demo -->
+            <div class="demo-container">
+                <div class="demo-box">
+                    <h3 class="demo-title">To-Do List Application</h3>
+                    <p>JavaScript enables you to build interactive applications like this to-do list.</p>
+                    <div class="todo-demo">
+                        <div class="todo-input">
+                            <input type="text" id="todoInput" placeholder="Add a new task...">
+                            <button class="btn" id="addTodo">Add</button>
+                        </div>
+                        <ul class="todo-list" id="todoList"></ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <h2>JavaScript Showcase</h2>
+                    <p>Learn modern JavaScript techniques through interactive examples and visual demonstrations.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-codepen"></i></a>
+                        <a href="#"><i class="fab fa-github"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+                <div class="footer-links">
+                    <h3>Resources</h3>
+                    <ul>
+                        <li><a href="#">MDN JavaScript Docs</a></li>
+                        <li><a href="#">JavaScript Tutorials</a></li>
+                        <li><a href="#">ES6+ Features</a></li>
+                        <li><a href="#">API Documentation</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 JavaScript Showcase. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // DOM Manipulation Demo
+        document.getElementById('changeText').addEventListener('click', function() {
+            document.getElementById('demoElement').textContent = 'Text changed with JavaScript!';
+        });
+
+        document.getElementById('changeColor').addEventListener('click', function() {
+            const element = document.getElementById('demoElement');
+            element.style.backgroundColor = '#ef476f';
+            element.style.color = 'white';
+        });
+
+        document.getElementById('resetDom').addEventListener('click', function() {
+            const element = document.getElementById('demoElement');
+            element.textContent = 'Click the buttons to modify me!';
+            element.style.backgroundColor = '#4361ee';
+            element.style.color = 'white';
+        });
+
+        // Event Handling Demo
+        const eventBox = document.getElementById('eventBox');
+        const eventStatus = document.getElementById('eventStatus');
+
+        eventBox.addEventListener('click', function() {
+            eventStatus.textContent = 'Box clicked!';
+            eventBox.style.transform = 'scale(0.95)';
+            setTimeout(() => {
+                eventBox.style.transform = 'scale(1)';
+            }, 200);
+        });
+
+        eventBox.addEventListener('mouseover', function() {
+            eventStatus.textContent = 'Mouse over the box!';
+            eventBox.style.backgroundColor = '#4cc9f0';
+        });
+
+        eventBox.addEventListener('mouseout', function() {
+            eventStatus.textContent = 'Mouse moved away!';
+            eventBox.style.backgroundColor = '#f72585';
+        });
+
+        // Counter Demo
+        let count = 0;
+        const counterValue = document.getElementById('counterValue');
+
+        document.getElementById('increment').addEventListener('click', function() {
+            count++;
+            counterValue.textContent = count;
+        });
+
+        document.getElementById('decrement').addEventListener('click', function() {
+            count--;
+            counterValue.textContent = count;
+        });
+
+        document.getElementById('resetCounter').addEventListener('click', function() {
+            count = 0;
+            counterValue.textContent = count;
+        });
+
+        // API Demo
+        document.getElementById('fetchUser').addEventListener('click', function() {
+            fetch('https://randomuser.me/api/')
+                .then(response => response.json())
+                .then(data => {
+                    const user = data.results[0];
+                    const userData = document.getElementById('userData');
+                    userData.innerHTML = `
+                        <div class="user-card">
+                            <img src="${user.picture.large}" alt="User" class="user-avatar">
+                            <div>
+                                <h3>${user.name.first} ${user.name.last}</h3>
+                                <p>${user.email}</p>
+                                <p>${user.location.city}, ${user.location.country}</p>
+                            </div>
+                        </div>
+                    `;
+                })
+                .catch(error => {
+                    document.getElementById('userData').innerHTML = `
+                        <p>Error fetching user data. Please try again.</p>
+                    `;
+                });
+        });
+
+        // To-Do List Demo
+        const todoInput = document.getElementById('todoInput');
+        const addTodoBtn = document.getElementById('addTodo');
+        const todoList = document.getElementById('todoList');
+
+        addTodoBtn.addEventListener('click', function() {
+            if (todoInput.value.trim() !== '') {
+                addTodoItem(todoInput.value);
+                todoInput.value = '';
+            }
+        });
+
+        todoInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter' && todoInput.value.trim() !== '') {
+                addTodoItem(todoInput.value);
+                todoInput.value = '';
+            }
+        });
+
+        function addTodoItem(text) {
+            const li = document.createElement('li');
+            li.className = 'todo-item';
+            li.innerHTML = `
+                <span>${text}</span>
+                <div class="todo-actions">
+                    <button class="complete-btn"><i class="fas fa-check"></i></button>
+                    <button class="delete-btn"><i class="fas fa-trash"></i></button>
+                </div>
+            `;
+            
+            li.querySelector('.complete-btn').addEventListener('click', function() {
+                li.classList.toggle('completed');
+            });
+            
+            li.querySelector('.delete-btn').addEventListener('click', function() {
+                li.remove();
+            });
+            
+            todoList.appendChild(li);
+        }
+    </script>
+</body>
+</html>
